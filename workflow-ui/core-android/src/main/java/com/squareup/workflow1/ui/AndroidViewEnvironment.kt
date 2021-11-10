@@ -36,8 +36,14 @@ import com.squareup.workflow1.ui.container.RootScreenViewFactory
 @WorkflowUiExperimentalApi
 public fun <ScreenT : Screen>
   ViewEnvironment.getViewFactoryForRendering(rendering: ScreenT): ScreenViewFactory<ScreenT> {
+  val entry = get(ViewRegistry).getEntryFor(rendering::class)
+
+  if (entry is ScreenViewFactory<ScreenT>) return entry
+
+  if (entry is ScreenComposableFactory<ScreenT>)
+
   @Suppress("UNCHECKED_CAST", "DEPRECATION")
-  return (get(ViewRegistry).getEntryFor(rendering::class) as? ScreenViewFactory<ScreenT>)
+  return (entry as? ScreenViewFactory<ScreenT>)
     ?: (rendering as? AndroidScreen<*>)?.viewFactory as? ScreenViewFactory<ScreenT>
     ?: (rendering as? AsScreen<*>)?.let { AsScreenViewFactory as ScreenViewFactory<ScreenT> }
     ?: (rendering as? BackStackScreen<*>)?.let {
