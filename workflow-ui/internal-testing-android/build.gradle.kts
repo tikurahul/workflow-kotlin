@@ -18,6 +18,9 @@ dependencies {
   api(Dependencies.AndroidX.appcompat)
   api(Dependencies.Kotlin.Stdlib.jdk6)
   api(Dependencies.Test.AndroidX.Espresso.core)
+  api(Dependencies.Test.AndroidX.junitExt)
+  api(Dependencies.Test.junit)
+  api(Dependencies.leakcanary)
 
   implementation(Dependencies.Test.leakcanaryInstrumentation)
 }

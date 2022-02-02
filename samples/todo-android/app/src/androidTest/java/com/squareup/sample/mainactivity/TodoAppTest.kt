@@ -12,15 +12,14 @@ import androidx.test.uiautomator.UiDevice
 import com.squareup.sample.todo.R
 import com.squareup.sample.todo.ToDoActivity
 import com.squareup.workflow1.ui.WorkflowUiExperimentalApi
-import com.squareup.workflow1.ui.internal.test.DetectLeaksAfterTestSuccess
 import com.squareup.workflow1.ui.internal.test.actuallyPressBack
 import com.squareup.workflow1.ui.internal.test.inAnyView
+import com.squareup.workflow1.ui.internal.test.wrapInLeakCanary
 import org.hamcrest.Matchers.allOf
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
@@ -28,7 +27,7 @@ import org.junit.runner.RunWith
 class TodoAppTest {
 
   private val scenarioRule = ActivityScenarioRule(ToDoActivity::class.java)
-  @get:Rule val rules = RuleChain.outerRule(DetectLeaksAfterTestSuccess()).around(scenarioRule)!!
+  @get:Rule val rules = scenarioRule.wrapInLeakCanary()
   private val uiDevice by lazy { UiDevice.getInstance(getInstrumentation()) }
 
   @Before

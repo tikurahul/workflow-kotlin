@@ -2,6 +2,7 @@ package com.squareup.workflow1.ui.internal.test
 
 import leakcanary.AppWatcher
 import leakcanary.LeakAssertions
+import org.junit.rules.RuleChain
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
@@ -37,3 +38,15 @@ public class DetectLeaksAfterTestSuccess(
     }
   }
 }
+
+/**
+ * Invokes [LeakAssertions.assertNoLeaks] before performing the tear-down logic of the receiver
+ * [TestRule], then again *after* the other rule's logic.
+ *
+ * https://github.com/square/workflow-kotlin/issues/657
+ */
+public fun TestRule.wrapInLeakCanary(): RuleChain = requireNotNull(
+  RuleChain.outerRule(DetectLeaksAfterTestSuccess())
+    .around(this)
+    .around(DetectLeaksAfterTestSuccess())
+)

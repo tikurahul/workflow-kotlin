@@ -13,15 +13,16 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.runner.RunWith
+import com.squareup.workflow1.ui.internal.test.wrapInLeakCanary
 
 @RunWith(AndroidJUnit4::class)
 @OptIn(WorkflowUiExperimentalApi::class)
 class InlineRenderingTest {
 
   private val composeRule = createAndroidComposeRule<InlineRenderingActivity>()
-  @get:Rule val rules: RuleChain = RuleChain.outerRule(DetectLeaksAfterTestSuccess())
-    .around(IdleAfterTestRule)
+  @get:Rule val rules: RuleChain = RuleChain.outerRule(IdleAfterTestRule)
     .around(composeRule)
+    .wrapInLeakCanary()
 
   @Test fun counterIncrements() {
     composeRule.onNode(hasClickAction())
