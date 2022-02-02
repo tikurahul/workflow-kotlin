@@ -38,6 +38,7 @@ dependencies {
 
   androidTestImplementation(project(":workflow-runtime"))
   androidTestImplementation(libs.androidx.activity.core)
+  androidTestImplementation(libs.androidx.lifecycle.viewmodel.ktx)
   androidTestImplementation(libs.androidx.compose.ui)
   androidTestImplementation(libs.kotlin.test.jdk)
   androidTestImplementation(libs.androidx.test.core)
