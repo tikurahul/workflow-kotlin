@@ -11,7 +11,7 @@ buildscript {
     classpath(libs.kotlin.serialization.gradle.plugin)
     classpath(libs.kotlinx.binaryCompatibility.gradle.plugin)
     classpath(libs.kotlin.gradle.plugin)
-    classpath(Dependencies.ksp)
+    classpath(libs.google.ksp)
     classpath(libs.ktlint.gradle)
     classpath(libs.vanniktech.publish)
   }

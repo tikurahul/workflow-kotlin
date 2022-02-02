@@ -20,6 +20,35 @@ dependencyResolutionManagement {
   }
 }
 
+plugins {
+  id("com.gradle.enterprise").version("3.8.1")
+}
+
+gradleEnterprise {
+  buildScan {
+
+    termsOfServiceUrl = "https://gradle.com/terms-of-service"
+    termsOfServiceAgree = "yes"
+
+    val githubActionID = System.getenv("GITHUB_ACTION")
+    publishAlways()
+
+    if (!githubActionID.isNullOrBlank()) {
+      tag("CI")
+      link(
+        "WorkflowURL",
+        "https://github.com/" +
+          System.getenv("GITHUB_REPOSITORY") +
+          "/pull/" +
+          System.getenv("PR_NUMBER") +
+          "/checks?check_run_id=" +
+          System.getenv("GITHUB_RUN_ID")
+      )
+    }
+  }
+}
+
+
 include(
   ":internal-testing-utils",
   ":samples:compose-samples",

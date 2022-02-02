@@ -26,14 +26,13 @@ android {
 }
 
 dependencies {
-  implementation deps.activityktx
-  implementation deps.appcompat
-  implementation deps.kotlin.stdlib
-  implementation deps.material
+  implementation libs.androidx.activity.ktx
+  implementation libs.androidx.appcompat
+  implementation libs.google.android.material
   implementation deps.workflow.container_android
-  implementation deps.viewmodelktx
-  implementation deps.viewmodelsavedstate
-  implementation deps.material
+  implementation libs.androidx.lifecycle.viewmodel.ktx
+  implementation libs.androidx.lifecycle.viewmodel.savedstate
+  implementation libs.google.android.material
   implementation deps.workflow.core_android
   implementation project(':tutorial-views')
 }

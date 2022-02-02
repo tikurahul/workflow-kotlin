@@ -6,3 +6,16 @@ include ':tutorial-3-complete'
 include ':tutorial-4-complete'
 include ':tutorial-final'
 include ':tutorial-views'
+
+enableFeaturePreview("VERSION_CATALOGS")
+
+dependencyResolutionManagement {
+
+  versionCatalogs {
+
+    create("libs") {
+      // Re-use the version catalog file from the main project
+      from(files("../../gradle/libs.versions.toml"))
+    }
+  }
+}

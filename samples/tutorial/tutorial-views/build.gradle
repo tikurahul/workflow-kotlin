@@ -30,8 +30,6 @@ android {
 }
 
 dependencies {
-  api deps.constraintlayout
-  implementation deps.kotlin.stdlib
-  implementation deps.recyclerview
-  implementation deps.viewbinding
+  api libs.androidx.constraintlayout
+  implementation libs.androidx.recyclerview
 }
