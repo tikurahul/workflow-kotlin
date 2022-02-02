@@ -16,17 +16,17 @@ import com.squareup.workflow1.ui.backstack.test.fixtures.BackStackContainerLifec
 import com.squareup.workflow1.ui.backstack.test.fixtures.ViewStateTestView
 import com.squareup.workflow1.ui.backstack.test.fixtures.viewForScreen
 import com.squareup.workflow1.ui.backstack.test.fixtures.waitForScreen
-import com.squareup.workflow1.ui.internal.test.DetectLeaksAfterTestSuccess
+import com.squareup.workflow1.ui.internal.test.wrapInLeakCanary
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.RuleChain
 
 @OptIn(WorkflowUiExperimentalApi::class)
 internal class BackstackContainerTest {
 
   private val scenarioRule =
     ActivityScenarioRule(BackStackContainerLifecycleActivity::class.java)
-  @get:Rule val rules = RuleChain.outerRule(DetectLeaksAfterTestSuccess()).around(scenarioRule)!!
+  @get:Rule val rules = scenarioRule.wrapInLeakCanary()
+
   private val scenario get() = scenarioRule.scenario
 
   // region Basic instance state save/restore tests

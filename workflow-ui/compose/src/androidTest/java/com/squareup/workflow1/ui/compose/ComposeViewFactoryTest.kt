@@ -21,8 +21,8 @@ import com.squareup.workflow1.ui.ViewEnvironmentKey
 import com.squareup.workflow1.ui.ViewRegistry
 import com.squareup.workflow1.ui.WorkflowUiExperimentalApi
 import com.squareup.workflow1.ui.WorkflowViewStub
-import com.squareup.workflow1.ui.internal.test.DetectLeaksAfterTestSuccess
 import com.squareup.workflow1.ui.internal.test.IdleAfterTestRule
+import com.squareup.workflow1.ui.internal.test.wrapInLeakCanary
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.RuleChain
@@ -33,10 +33,9 @@ import org.junit.runner.RunWith
 internal class ComposeViewFactoryTest {
 
   private val composeRule = createComposeRule()
-  @get:Rule val rules: RuleChain =
-    RuleChain.outerRule(DetectLeaksAfterTestSuccess())
-      .around(IdleAfterTestRule)
-      .around(composeRule)
+  @get:Rule val rules: RuleChain = RuleChain.outerRule(IdleAfterTestRule)
+    .around(composeRule)
+    .wrapInLeakCanary()
 
   @Test fun showsComposeContent() {
     val viewFactory = composeViewFactory<Unit> { _, _ ->
