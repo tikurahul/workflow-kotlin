@@ -1,6 +1,8 @@
 package com.squareup.workflow1.ui.internal.test
 
+import android.os.SystemClock
 import leakcanary.AppWatcher
+import leakcanary.KeyedWeakReference.Companion.heapDumpUptimeMillis
 import leakcanary.LeakAssertions
 import org.junit.rules.RuleChain
 import org.junit.rules.TestRule
@@ -26,13 +28,15 @@ public class DetectLeaksAfterTestSuccess(
     return object : Statement() {
       override fun evaluate() {
         // If the test fails, evaluate() will throw and we won't run the analysis (which is good).
+        var heapDumpUptimeMillis = 0L
         try {
           base.evaluate()
+          heapDumpUptimeMillis = SystemClock.uptimeMillis()
           LeakAssertions.assertNoLeaks(tag)
         } finally {
           // Otherwise upstream test failures will be reported as leaks.
           // https://github.com/square/leakcanary/issues/2297
-          AppWatcher.objectWatcher.clearWatchedObjects()
+          AppWatcher.objectWatcher.clearObjectsWatchedBefore(heapDumpUptimeMillis)
         }
       }
     }
