@@ -479,7 +479,6 @@ internal class ComposeViewTreeIntegrationTest {
         "Counter[$layer][$screen]: $counter",
         Modifier
           .clickable { counter++ }
-          .testTag("[$layer][$screen]")
       )
     }
 
