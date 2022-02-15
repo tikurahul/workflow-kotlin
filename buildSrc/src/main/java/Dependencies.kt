@@ -10,7 +10,7 @@ object Versions {
 
 @Suppress("unused")
 object Dependencies {
-  const val android_gradle_plugin = "com.android.tools.build:gradle:7.0.0"
+  const val android_gradle_plugin = "com.android.tools.build:gradle:7.3.0-alpha03"
 
   object AndroidX {
     const val activity = "androidx.activity:activity:1.3.0"
@@ -125,9 +125,12 @@ object Dependencies {
 
   object Test {
     object AndroidX {
+      object Benchmark {
+        const val macro = "androidx.benchmark:benchmark-macro-junit4:1.1.0-SNAPSHOT"
+      }
+
       const val compose = "androidx.compose.ui:ui-test-junit4:1.0.1"
       const val core = "androidx.test:core:1.3.0"
-      const val lifecycle = "androidx.lifecycle:lifecycle-runtime-testing:2.4.0"
 
       object Espresso {
         const val core = "androidx.test.espresso:espresso-core:3.3.0"
@@ -136,6 +139,8 @@ object Dependencies {
       }
 
       const val junitExt = "androidx.test.ext:junit:1.1.3"
+      const val lifecycle = "androidx.lifecycle:lifecycle-runtime-testing:2.4.0"
+      const val profileInstaller = "androidx.profileinstaller:profileinstaller:1.2.0-SNAPSHOT"
       const val runner = "androidx.test:runner:1.4.0"
       const val truthExt = "androidx.test.ext:truth:1.4.0"
       const val uiautomator = "androidx.test.uiautomator:uiautomator:2.2.0"

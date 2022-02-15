@@ -18,6 +18,12 @@ android {
     // Required for SnakeYAML.
     isCoreLibraryDesugaringEnabled = true
   }
+  buildTypes {
+    release {
+      signingConfig = signingConfigs.getByName("debug")
+      isDebuggable = false
+    }
+  }
 }
 
 dependencies {
@@ -35,6 +41,8 @@ dependencies {
   implementation(Dependencies.AndroidX.constraint_layout)
   implementation(Dependencies.AndroidX.material)
   implementation(Dependencies.AndroidX.gridlayout)
+  // Used to side load Baseline Profile when Benchmarking.
+  implementation(Dependencies.Test.AndroidX.profileInstaller)
   implementation(Dependencies.Kotlin.Coroutines.rx2)
   implementation(Dependencies.okio)
   implementation(Dependencies.rxandroid2)

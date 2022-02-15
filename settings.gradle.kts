@@ -1,6 +1,18 @@
+plugins {
+  id("com.gradle.enterprise") version "3.8.1"
+}
+
+gradleEnterprise {
+  buildScan {
+    termsOfServiceUrl = "https://gradle.com/terms-of-service"
+    termsOfServiceAgree = "yes"
+  }
+}
+
 rootProject.name = "workflow"
 
 include(
+    ":benchmarks:dungeon-benchmark",
     ":internal-testing-utils",
     ":samples:compose-samples",
     ":samples:containers:app-poetry",
@@ -39,4 +51,4 @@ include(
 )
 
 // Include the tutorial build so the IDE sees it when syncing the main project.
-includeBuild("samples/tutorial")
+// includeBuild("samples/tutorial")

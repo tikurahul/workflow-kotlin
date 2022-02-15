@@ -6,5 +6,5 @@ data class Game(
   val playerLocation: Location,
   val aiLocations: List<Location>
 ) {
-  val isPlayerEaten: Boolean get() = aiLocations.any { it == playerLocation }
+  val isPlayerEaten: Boolean get() = false //aiLocations.any { it == playerLocation }
 }
