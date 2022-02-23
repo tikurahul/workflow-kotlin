@@ -55,7 +55,7 @@ public class WorkflowBaselineBenchmark {
     benchmarkRule.measureRepeated(
       packageName = PACKAGE_NAME,
       metrics = listOf(StartupTimingMetric(), FrameTimingMetric()),
-      iterations = 10,
+      iterations = 3,
       startupMode = StartupMode.COLD,
       compilationMode = compilationMode,
       setupBlock = {

@@ -29,6 +29,7 @@ android {
     create("release") {
       isDebuggable = true
       signingConfig = getByName("debug").signingConfig
+      proguardFile("baseline-proguard-rules.pro")
     }
   }
 
@@ -45,6 +46,6 @@ dependencies {
 
 androidComponents {
   beforeVariants(selector().all()) {
-    it.enabled = it.buildType == "release"
+    it.enable = it.buildType == "release"
   }
 }

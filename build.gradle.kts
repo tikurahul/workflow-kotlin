@@ -34,7 +34,7 @@ subprojects {
     mavenCentral()
     // Add or remove this updated the id after builds to the latest snapshot for AndroidX snapshots
     // See androidx.dev
-    maven { url = java.net.URI.create("https://androidx.dev/snapshots/builds/8200238/artifacts/repository") }
+    maven { url = java.net.URI.create("https://androidx.dev/snapshots/builds/8210991/artifacts/repository") }
   }
 
   apply(plugin = "org.jlleitschuh.gradle.ktlint")
